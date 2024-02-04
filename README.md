@@ -48,8 +48,7 @@ Our vision is to provide users with a state-of-the-art music streaming experienc
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/ai-music-recommendation.git
-
+   git clone https://github.com/palsuryaofficio/Diversion-2k24
 2. Set up the virtual environment:
    ```bash
    cd ai-music-recommendation

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment-Based Song Recommendations</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="{{ url_for('static', filename='js/landing_page_script.js') }}"></script>
+
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="mb-4">Welcome to the Sentiment-Based Song Recommendations App</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Get Recommendations</h2>
+                <form action="/recommend" method="post">
+                    <div class="form-group">
+                        <label for="user_input">Enter your mood or a sentence:</label>
+                        <input type="text" class="form-control" id="user_input" name="user_input" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Get Recommendations</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2>Search for a Specific Song</h2>
+                <form action="/search" method="post">
+                    <div class="form-group">
+                        <label for="search_query">Search for a song:</label>
+                        <input type="text" class="form-control" id="search_query" name="search_query" required>
+                    </div>
+                    <button type="submit" class="btn btn-info">Search</button>
+
+
+                </form>
+
+            <h2>Time-of-Day Recommendations</h2>
+        <button onclick="getRecommendationsByTime()">Get Recommendations</button>
+        <div id="timeOfDayRecommendations"></div>
+
+        <!-- Collaborative Playlists Section -->
+        <h2 >Collaborative Playlists</h2>
+        <button onclick="inviteFriends()">Invite Friends</button>
+        <div id="collaborativePlaylist"></div>
+
+
+
+
+
+            </div>
+
+
+
+            <h2>Location-based Recommendations</h2>
+<button id="locationRecommendationButton">Get Recommendations based on Location</button>
+<div id="locationRecommendations"></div><BR>
+            <script>
+    // Function to get location-based recommendations
+    function getLocationRecommendations() {
+        // Check if the browser supports geolocation
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                // Get the user's latitude and longitude
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                // Make an AJAX request to your Flask backend
+                $.ajax({
+                    url: '/get_location_recommendations',
+                    method: 'GET',
+                    data: { latitude: latitude, longitude: longitude },
+                    success: function (data) {
+                        // Update the 'locationRecommendations' div with the received recommendations
+                        $('#locationRecommendations').html('<p>' + data.recommendations.join('</p><p>') + '</p>');
+                    },
+                    error: function (error) {
+                        console.error('Error fetching location-based recommendations:', error);
+                    }
+                });
+            }, function (error) {
+                console.error('Error getting location:', error);
+            });
+        } else {
+            console.error('Geolocation is not supported by this browser.');
+        }
+    }
+
+    // Example: Call the function when the user clicks the button
+    $('#locationRecommendationButton').click(function () {
+        getLocationRecommendations();
+    });
+</script>
+        </div>
+    </div>
+<style>/* Add styling for the landing page */
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+h2 {
+    color: #007bff;
+}
+
+/* Add styling for the navigation bar */
+.navbar {
+    background-color: #007bff;
+    padding: 15px;
+}
+
+/* Add styling for buttons */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Add styling for form inputs */
+.form-control {
+    margin-bottom: 10px;
+}
+
+/* Add styling for song recommendations */
+.song-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    text-align: center;
+}
+
+/* Add styling for the emotion recognition section */
+#camera {
+    display: none;
+}
+
+#canvas {
+    display: none;
+    margin-top: 20px;
+}
+
+/* Add styling for the analyze emotion button */
+.analyze-emotion-btn {
+    margin-top: 20px;
+}
+
+/* Add styling for the user registration and login forms */
+.register-login-form {
+    max-width: 400px;
+    margin: auto;
+}
+</style>
+
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!-- collaborative_playlist.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Playlist</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- Add your CSS styles or link to external stylesheets if needed -->
+</head>
+<body>
+    <h2>Collaborative Playlist</h2>
+    <p>Invite your friends to contribute to this playlist!</p>
+
+    <!-- Add a form to allow users to contribute to the playlist -->
+    <form action="/contribute_to_playlist" method="post">
+        <label for="song_name">Song Name:</label>
+        <input type="text" id="song_name" name="song_name" required>
+
+        <label for="artist_name">Artist Name:</label>
+        <input type="text" id="artist_name" name="artist_name" required>
+
+        <button type="submit">Contribute</button>
+    </form>
+
+    <!-- Display the current playlist -->
+    <h3>Current Playlist:</h3>
+    <ul>
+        {% for song in playlist %}
+            <li>{{ song['song_name'] }} by {{ song['artist_name'] }}</li>
+        {% endfor %}
+    </ul>
+
+    <script>
+    // Function to update the playlist dynamically
+    function updatePlaylist() {
+        // Make an AJAX request to get the updated playlist
+        $.ajax({
+            url: '/get_updated_playlist',
+            method: 'GET',
+            success: function(data) {
+                // Update the playlist in the HTML
+                var playlistHtml = '<h3>Current Playlist:</h3><ul>';
+                for (var i = 0; i < data.playlist.length; i++) {
+                    playlistHtml += '<li>' + data.playlist[i]['song_name'] + ' by ' + data.playlist[i]['artist_name'] + '</li>';
+                }
+                playlistHtml += '</ul>';
+                $('#currentPlaylist').html(playlistHtml);
+            },
+            error: function(error) {
+                console.error('Error updating playlist:', error);
+            }
+        });
+    }
+
+    // Update the playlist initially (when the page loads)
+    $(document).ready(function() {
+        updatePlaylist();
+    });
+
+    // Add a listener to the form for contributing to the playlist
+    $('#contributeForm').submit(function(event) {
+        // Prevent the default form submission
+        event.preventDefault();
+
+        // Make an AJAX request to add a new song to the playlist
+        $.ajax({
+            url: '/contribute_to_playlist',
+            method: 'POST',
+            data: $(this).serialize(), // Serialize the form data
+            success: function() {
+                // Update the playlist after contributing
+                updatePlaylist();
+                // Clear the form fields
+                $('#song_name').val('');
+                $('#artist_name').val('');
+            },
+            error: function(error) {
+                console.error('Error contributing to playlist:', error);
+            }
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

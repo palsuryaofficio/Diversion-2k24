@@ -74,6 +74,37 @@ Our vision is to provide users with a state-of-the-art music streaming experienc
 - Spotipy
 - NLTK
 
+## Features:
+
+1. **Name Based Song Search [Generic]:**
+   - Allows users to search for songs using song names, providing a traditional and straightforward search method.
+
+2. **Facial Emotion Based Song Recommendation:**
+   - Utilizes facial expression analysis to recommend songs based on the user's emotional state, offering a unique and personalized music discovery experience.
+
+3. **Time Based Music Recommendation:**
+   - Recommends music based on the time of the day, adapting to users' preferences and moods during different periods.
+
+4. **User-Mood Tag Based Music Recommendation:**
+   - Recommends songs based on user-defined mood tags, enabling users to explore music aligned with their current emotional states or preferences.
+
+5. **Dynamic and real-time Community-based msuic streaming:**
+   - Users can share dynamic rooms and chat among while streaming music making it a 3D dynamic streaming platform
+
+## Purpose:
+
+The purpose of our AI-based music recommendation system is to revolutionize the music streaming experience by providing personalized and context-aware recommendations. We aim to cater to diverse user preferences and enhance user engagement through innovative features.
+
+## Motivation:
+
+Our motivation stems from the desire to understand and connect with users on a deeper level. By incorporating facial expression analysis, we aim to go beyond traditional recommendation methods and create a more immersive and emotionally resonant music streaming platform.
+
+## Vision:
+
+Our vision is to deliver a state-of-the-art music streaming experience, empowering users to discover and listen to the exact tunes they desire. We strive to set our platform apart by understanding user behavior through facial expressions, making it a unique selling proposition (USP) in the market. This not only enhances user satisfaction but also positions our service as economically profitable, serving vital business aspects.
+
+In summary, our project is driven by the ambition to redefine music streaming through innovation, personalization, and a deep understanding of user emotions, ultimately providing a seamless and enjoyable music listening journey for our users.
+
 ### Future Scope
 
 # **Future Scope for AI Music Recommendation System**
